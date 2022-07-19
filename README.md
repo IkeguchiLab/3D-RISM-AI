@@ -23,7 +23,7 @@ predicts binding free energies using XGBR as a model and ComPrtLigBind as a desc
 
 Output is regression.pdf displaying predictions of binding free energies.
 
-The model and descriptor can be seleted using options.
+You can use other models and descriptors using options.
 
 ```
 usage: 3D-RISM-AI.py [-h] [--model {XGBR,RFR,SVR,RR}]
