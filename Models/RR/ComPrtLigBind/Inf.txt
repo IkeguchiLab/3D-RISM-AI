@@ -1,0 +1,4 @@
+Model RR
+Params
+alpha 18
+random_state 2525

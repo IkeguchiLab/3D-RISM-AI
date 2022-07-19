@@ -1,0 +1,15 @@
+Model XGBR
+Params
+##step 1
+max_depth 20
+min_child_weight 10
+##step 3
+subsample 0.8
+colsample_bytree 0.8
+##step5
+objective reg:squarederror
+learning_rate 0.05
+n_estimators 100
+random_state 2525
+seed 2525
+n_jobs 4

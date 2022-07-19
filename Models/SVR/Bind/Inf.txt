@@ -1,0 +1,5 @@
+Model SVR
+Params
+C   1
+gamma 1
+kernel rbf

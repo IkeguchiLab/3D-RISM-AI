@@ -1,0 +1,17 @@
+Model XGBR
+Params
+max_depth 15 20 25 30
+min_child_weight 4 6 8 10
+subsample 0.4 0.6 0.8
+colsample_bytree 0.4 0.6 0.8
+##constant
+objective reg:squarederror
+learning_rate 0.05
+n_estimators 100
+random_state 2525
+seed 2525
+n_jobs 1
+Descriptor LigBind
+metric rmse r rho
+GSCPU 6
+No 00
