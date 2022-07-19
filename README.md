@@ -17,9 +17,9 @@ conda activate 3D-RISM-AI
 ## Usage
 Simply, 
 ```
-python Scripts/3D-RISM-AI 
+python Scripts/3D-RISM-AI.py 
 ```
-uses XGBR as a model and ComPrtLigBind as a descriptor.
+predicts binding free energies using XGBR as a model and ComPrtLigBind as a descriptor.
 
 Output is regression.pdf displaying predictions of binding free energies.
 
@@ -39,12 +39,4 @@ optional arguments:
                         select one of descriptors
 ```
 
-
-Simply, 
-```
-python Scripts/3D-RISM-AI 
-```
-uses XGBR as a model and ComPrtLigBind as a descriptor.
-
-Output is regression.pdf displaying predictions of binding free energies.
 
