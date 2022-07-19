@@ -101,6 +101,8 @@ def plot_scatter(df_list,  modelname, x_title, y_title, fname=None):
     plt.yticks(range(-16, -1, 2), fontsize=10)
     plt.xlim(-17, -1)
     plt.ylim(-17, -1)
+    plt.xlabel('exp dG (kcal/mol)')
+    plt.ylabel('pred dG (kcal/mol)')
     #ax.legend(handles=scats, labels=[r'AE $\leq$ 2', r'AE $>$ 2'], fontsize=10, markerscale=2, handlelength=1, loc='upper left')
     if fname is None:
         plt.show()
