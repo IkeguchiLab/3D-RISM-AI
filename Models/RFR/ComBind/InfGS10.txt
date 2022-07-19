@@ -1,0 +1,13 @@
+Model RFR
+Params
+max_features 0.3 0.5 0.7 0.9
+max_depth  15 20 25 30
+min_samples_split 2 4 6
+min_samples_leaf 1 2 4
+n_estimators 100
+random_state 2525
+n_jobs 1
+Descriptor ComBind
+metric rmse r rho
+GSCPU 6
+No 10

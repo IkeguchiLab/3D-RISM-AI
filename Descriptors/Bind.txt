@@ -1,0 +1,2 @@
+MainData delta_AllPotn delta_ChemPotn delta_Entropy delta_SolPotn delta_PartMolV delta_SASA  delta_ApolChem delta_PolChem delta_ApolEnt delta_PolEnt delta_ApolSolPotn delta_PolSolPotn delta_ApolMolV delta_PolMolV 
+SubData G_theory
