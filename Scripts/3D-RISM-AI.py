@@ -12,15 +12,21 @@ from ReadDataFiles import read_data_files, clean_data, wide_display
 # parse arguments
 import argparse
 parser = argparse.ArgumentParser(description='3D-RISM-AI: Machine Learning Model using 3D-RISM descriptors')
-parser.add_argument('--model', choices=['XGBR','RFR','SVR','RR'], default='XGBR', help='select one of models')
-parser.add_argument('--desc', choices=['Bind','ComBind','ComLigBind','ComPrtBind','ComPrtLigBind','LigBind','PrtBind','PrtLigBind'], default='ComPrtLigBind',help='select one of descriptors')
+parser.add_argument('--model', choices=['XGBR','RFR','SVR','RR'], default='XGBR', help='select one of models (default: XGBR)')
+parser.add_argument('--desc', choices=['Bind','ComBind','ComLigBind','ComPrtBind','ComPrtLigBind','LigBind','PrtBind','PrtLigBind'], default='ComPrtLigBind',help='select one of descriptors (default:ComPrtLigBind)')
+parser.add_argument('--out', default='predictions.csv',help='output file name (default: predictions.csv)')
+parser.add_argument('--fig', default='regression.pdf',help='output figure file name (default: regression.pdf)')
 args=parser.parse_args()
 
 # select descriptor and model
 descriptor = args.desc
 modelname = args.model
+outfname = args.out
+figfname = args.fig
 print(f'model: {modelname}')
 print(f'descriptor: {descriptor}')
+print(f'output_file_name: {outfname}')
+print(f'figure_file_name: {figfname}')
 inf_file = f'{work_dir}/Models/{modelname}/{descriptor}/Inf.txt'
 descriptor_file = f'{work_dir}/Descriptors/{descriptor}.txt'
 matrix_data_dir = f'{work_dir}/out_matrix/'
@@ -55,6 +61,8 @@ else:
 
 # calculate difference between predictions and experimental values
 gap_data = run_data.get_gap_values(all_data)
+print(f'output: {outfname}')
+gap_data.loc[:,['PdbId','test_predict']].to_csv(outfname, index=False)
 print(gap_data.shape)
 #Low Absolute Error
 HAE_data = gap_data[gap_data['gap_values'] > 2.0]
@@ -110,4 +118,4 @@ def plot_scatter(df_list,  modelname, x_title, y_title, fname=None):
         plt.savefig(fname, bbox_inches="tight", pad_inches=0.1)
 
 # plot regression
-plot_scatter([gap_data, HAE_data], modelname, 'G_experiment', 'test_predict', 'regression.pdf')
+plot_scatter([gap_data, HAE_data], modelname, 'G_experiment', 'test_predict', figfname)

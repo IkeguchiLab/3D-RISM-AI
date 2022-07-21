@@ -21,22 +21,25 @@ python Scripts/3D-RISM-AI.py
 ```
 predicts binding free energies using XGBR as a model and ComPrtLigBind as a descriptor.
 
-Output is regression.pdf displaying predictions of binding free energies.
+Outputs are predictions.csv containing predicted binding free energies and regression.pdf displaying predictions of binding free energies.
 
 You can use other models and descriptors using options.
 
 ```
 usage: 3D-RISM-AI.py [-h] [--model {XGBR,RFR,SVR,RR}]
                      [--desc {Bind,ComBind,ComLigBind,ComPrtBind,ComPrtLigBind,LigBind,PrtBind,PrtLigBind}]
+                     [--out OUT] [--fig FIG]
 
 3D-RISM-AI: Machine Learning Model using 3D-RISM descriptors
 
 optional arguments:
   -h, --help            show this help message and exit
   --model {XGBR,RFR,SVR,RR}
-                        select one of models
+                        select one of models (default: XGBR)
   --desc {Bind,ComBind,ComLigBind,ComPrtBind,ComPrtLigBind,LigBind,PrtBind,PrtLigBind}
-                        select one of descriptors
+                        select one of descriptors (default:ComPrtLigBind)
+  --out OUT             output file name (default: predictions.csv)
+  --fig FIG             output figure file name (default: regression.pdf)
 ```
 
 
