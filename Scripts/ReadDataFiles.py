@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import math
-import csv
 
 def miss_data(df):
     null_val = df.isnull().sum()
