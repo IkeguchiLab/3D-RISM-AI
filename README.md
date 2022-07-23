@@ -29,6 +29,7 @@ You can use other models and descriptors using options.
 usage: 3D-RISM-AI.py [-h] [--model {XGBR,RFR,SVR,RR}]
                      [--desc {Bind,ComBind,ComLigBind,ComPrtBind,ComPrtLigBind,LigBind,PrtBind,PrtLigBind}]
                      [--out OUT] [--fig FIG]
+                     [--train TRAIN] [--test TEST]
 
 3D-RISM-AI: Machine Learning Model using 3D-RISM descriptors
 
@@ -40,6 +41,8 @@ optional arguments:
                         select one of descriptors (default:ComPrtLigBind)
   --out OUT             output file name (default: predictions.csv)
   --fig FIG             output figure file name (default: regression.pdf)
+  --train TRAIN         input train data file name (default: train_data.csv)
+  --test TEST           input test data file name (default: test_data.csv)
 ```
 
 
