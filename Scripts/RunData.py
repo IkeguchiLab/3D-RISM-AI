@@ -33,12 +33,7 @@ class AllData:
         self.train_t = scaler.transform(self.train_t)
         self.test_t = scaler.transform(self.test_t)
 
-
     def GSCV(self, model, grid_params, metric, refit=None, GSCPU=1, verbose=0):
-        #if metric == 'rmse':
-        #    gscv = GridSearchCV(model, grid_params, cv=self.kf, scoring='neg_mean_squared_error', n_jobs=GSCPU, iid=False)
-        #else:
-        #    gscv = GridSearchCV(model, grid_params, cv=self.kf, scoring=self.my_cv_score, n_jobs=GSCPU, iid=False)
         if refit is None:
             refit = metric[0]
         gscv = GridSearchCV(model, grid_params, cv=self.kf, scoring=metric,
@@ -53,21 +48,6 @@ class AllData:
         y = y.T[0]
         r, p_value = pearsonr(y, y_predicted)
         return r
-
-    '''
-    def get_test_score(self, model):
-        result_train = model.predict(self.train_t)
-        list_train_a = self.train_a.T[0]
-        predicted_result = model.predict(self.test_t)
-        list_test_a = self.test_a.T[0]
-        train_r, train_p_value = pearsonr(list_train_a, result_train)
-        test_r, test_p_value = pearsonr(list_test_a, predicted_result)
-        test_rho, test_p_value = spearmanr(list_test_a, predicted_result)
-        train_r, test_r, test_rho = map(round, [train_r, test_r, test_rho], [4, 4, 4])
-        self.predicted_result = predicted_result
-        self.list_test_a = list_test_a
-        return train_r, test_r, test_rho
-    '''
 
     def conf_shape(self, array):
         if len(array.shape) == 1:
@@ -116,11 +96,11 @@ class AllData:
             eval_set=[(self.train_t, self.train_a, 'train'), (self.test_t, self.test_a, 'test')], \
             eval_metric=self.my_score, verbose=False)
 
-    def get_gap_values(self, all_df):
+    def get_gap_values(self):
         gap_list = list(map(lambda x, y: abs(x-y), self.list_test_a, self.predicted_result))
         df = pd.DataFrame({'test_a':self.list_test_a, 'test_predict':self.predicted_result, \
             'gap_values':gap_list}, index=self.test_index)
-        test_df = all_df.loc[self.test_index, :]
+        test_df = self.test_data
         df = pd.concat([test_df, df], axis=1)
         df = df.sort_values('gap_values')
         return df
@@ -131,7 +111,6 @@ class AllData:
         y_true = y_true.get_label()
         r, p_value = pearsonr(y_true, y_predicted)
         return 'my-score', r
-
 
     def ave_cv_evals(self, model):
         evals_result_li = []
@@ -156,27 +135,29 @@ class AllData:
 
 
 class TrainTestData(AllData):
-    def __init__(self, all_data, t_data, a_data=['G_experiment'], work_dir='./'):
-        self.all_data = all_data
-        #separate feature, answer
-        self.all_data_t = all_data[t_data].as_matrix()
-        self.all_data_a = all_data[a_data].as_matrix()
-        self.all_data_index = all_data.index.values
-        #separate train, test
-        test_set_file = f'{work_dir}/Lists/test_pdbs.txt'
-        train_data, test_data, no_pdbid_li = self.split_train_test(test_set_file)
+    def __init__(self, trainfname, testfname, t_data, a_data=['G_experiment'], work_dir='./'):
+        self.train_data = pd.read_csv(trainfname, index_col=0)
+        self.test_data = pd.read_csv(testfname, index_col=0)
+        self.all_data = pd.concat([self.train_data, self.test_data], axis=0)
+
+        print(f'all data: {self.all_data.shape}')
+        print(f'train data: {self.train_data.shape}')
+        print(f'test data: {self.test_data.shape}')
+
         ##shuffle
-        train_data = train_data.sample(frac=1, random_state=2525)
-        test_data = test_data.sample(frac=1, random_state=2525)
+        self.train_data = self.train_data.sample(frac=1, random_state=2525)
+        self.test_data = self.test_data.sample(frac=1, random_state=2525)
         #separate feature, answer
+        self.all_data_t = self.all_data[t_data].as_matrix()
+        self.all_data_a = self.all_data[a_data].as_matrix()
         ##train
-        self.train_t = train_data[t_data].as_matrix()
-        self.train_a = train_data[a_data].as_matrix()
-        self.train_index = list(train_data.index.values)
+        self.train_t = self.train_data[t_data].as_matrix()
+        self.train_a = self.train_data[a_data].as_matrix()
+        self.train_index = list(self.train_data.index.values)
         ##test
-        self.test_t = test_data[t_data].as_matrix()
-        self.test_a = test_data[a_data].as_matrix()
-        self.test_index = list(test_data.index.values)
+        self.test_t = self.test_data[t_data].as_matrix()
+        self.test_a = self.test_data[a_data].as_matrix()
+        self.test_index = list(self.test_data.index.values)
         #others
         self.num_split = 5
         self.kf = KFold(n_splits=self.num_split, shuffle=True, random_state=2525)
