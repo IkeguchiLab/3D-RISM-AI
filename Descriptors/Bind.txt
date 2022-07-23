@@ -1,2 +1,2 @@
-MainData delta_AllPotn delta_ChemPotn delta_Entropy delta_SolPotn delta_PartMolV delta_SASA  delta_ApolChem delta_PolChem delta_ApolEnt delta_PolEnt delta_ApolSolPotn delta_PolSolPotn delta_ApolMolV delta_PolMolV 
-SubData G_theory
+MainData Bind_E Bind_mu_total Bind_-TS_total Bind_epsilon_total Bind_V_total Bind_SASA Bind_mu_apolar Bind_mu_polar Bind_-TS_apolar Bind_-TS_polar Bind_epsilon_apolar Bind_epsilon_polar Bind_V_apolar Bind_V_polar
+SubData Bind_G_theory
