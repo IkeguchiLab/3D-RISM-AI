@@ -45,4 +45,8 @@ optional arguments:
   --test TEST           input test data file name (default: test_data.csv)
 ```
 
+## Citation
+
+Kazu Osaki, Toru Ekimoto, Tsutomu Yamane, and Mitsunori Ikeguchi, 3D-RISM-AI: A Machine Learning Approach to Predict Protein-Ligand Binding Affinity using 3D-RISM, submitted.
+
 
