@@ -50,6 +50,6 @@ optional arguments:
 For details of 3D-RISM-AI, see the following paper.
 If our models or any scripts are useful to you, consider citing the following paper in your publications:
 
-Kazu Osaki, Toru Ekimoto, Tsutomu Yamane, and Mitsunori Ikeguchi, 3D-RISM-AI: A machine learning approach to predict protein-ligand binding affinity using 3D-RISM, J. Phys. Chem. B in press.
+Kazu Osaki, Toru Ekimoto, Tsutomu Yamane, and Mitsunori Ikeguchi, 3D-RISM-AI: A machine learning approach to predict protein-ligand binding affinity using 3D-RISM, J. Phys. Chem. B 126, 33, 6148–6158 (2022).
 
 
